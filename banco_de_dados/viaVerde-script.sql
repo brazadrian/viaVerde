@@ -2,10 +2,11 @@ CREATE SCHEMA IF NOT EXISTS `viaVerde`;
 
 USE `viaVerde`;
 
--- CRIANDO TABELA clients
-
+-- -----------------------------------------------------
+-- tabela CLIENTS
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS viaVerde.clients (
-  `id-cpf` CHAR(11) NOT NULL,
+  `id_cpf` CHAR(11) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`email`),
@@ -15,11 +16,11 @@ CREATE TABLE IF NOT EXISTS viaVerde.clients (
 -- Table `viaVerde`.`farmers`
 
 CREATE TABLE IF NOT EXISTS `viaVerde`.`farmers` (
-  `id-cpf` CHAR(11) NOT NULL,
+  `id_cpf` CHAR(11) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `certificado-organico` BOOLEAN NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id-cpf`),
+  PRIMARY KEY (`id_cpf`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
 
 
@@ -38,22 +39,22 @@ CREATE TABLE IF NOT EXISTS `viaVerde`.`feiras` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `viaVerde`.`compras-vendas` (
   `id-compra` INT NOT NULL AUTO_INCREMENT,
-  `clients_id-cpf` CHAR(11) NOT NULL,
-  `farmers_id-cpf` CHAR(11) NOT NULL,
+  `clients_id_cpf` CHAR(11) NOT NULL,
+  `farmers_id_cpf` CHAR(11) NOT NULL,
   `resgate-data` DATETIME NOT NULL, -- A GENTE IA USAR O TIMESTAMP
   `feiras_id-feira` INT NOT NULL,
   PRIMARY KEY (`id-compra`),
-  INDEX `fk_compras_clients1_idx` (`clients_id-cpf` ASC) VISIBLE,
-  INDEX `fk_compras_farmers1_idx` (`farmers_id-cpf` ASC) VISIBLE,
+  INDEX `fk_compras_clients1_idx` (`clients_id_cpf` ASC) VISIBLE,
+  INDEX `fk_compras_farmers1_idx` (`farmers_id_cpf` ASC) VISIBLE,
   INDEX `fk_compras-vendas_feiras1_idx` (`feiras_id-feira` ASC) VISIBLE,
   CONSTRAINT `fk_compras_clients1`
-    FOREIGN KEY (`clients_id-cpf`)
-    REFERENCES `viaVerde`.`clients` (`id-cpf`)
+    FOREIGN KEY (`clients_id_cpf`)
+    REFERENCES `viaVerde`.`clients` (`id_cpf`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_compras_farmers1`
-    FOREIGN KEY (`farmers_id-cpf`)
-    REFERENCES `viaVerde`.`farmers` (`id-cpf`)
+    FOREIGN KEY (`farmers_id_cpf`)
+    REFERENCES `viaVerde`.`farmers` (`id_cpf`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_compras-vendas_feiras1`
@@ -88,9 +89,9 @@ CREATE TABLE IF NOT EXISTS `viaVerde`.`dia-de-funcionamento` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `viaVerde`.`feiras_tem_farmers` (
   `feiras_id-feira` INT NOT NULL,
-  `farmers_id-cpf` CHAR(11) NOT NULL,
-  PRIMARY KEY (`feiras_id-feira`, `farmers_id-cpf`),
-  INDEX `fk_feiras_has_farmers_farmers1_idx` (`farmers_id-cpf` ASC) VISIBLE,
+  `farmers_id_cpf` CHAR(11) NOT NULL,
+  PRIMARY KEY (`feiras_id-feira`, `farmers_id_cpf`),
+  INDEX `fk_feiras_has_farmers_farmers1_idx` (`farmers_id_cpf` ASC) VISIBLE,
   INDEX `fk_feiras_has_farmers_feiras1_idx` (`feiras_id-feira` ASC) VISIBLE,
   CONSTRAINT `fk_feiras_tem_farmers_feiras1`
     FOREIGN KEY (`feiras_id-feira`)
@@ -98,8 +99,8 @@ CREATE TABLE IF NOT EXISTS `viaVerde`.`feiras_tem_farmers` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_feiras_tem_farmers_farmers1`
-    FOREIGN KEY (`farmers_id-cpf`)
-    REFERENCES `viaVerde`.`farmers` (`id-cpf`)
+    FOREIGN KEY (`farmers_id_cpf`)
+    REFERENCES `viaVerde`.`farmers` (`id_cpf`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -116,18 +117,18 @@ START TRANSACTION; -- FAZER PESQUISAR
 
 USE `viaVerde`;
 
-INSERT INTO `viaVerde`.`clients` (`id-cpf`, `name`, `email`) VALUES ('69013032893', 'Rebecca Maria Marlene', 'becca@gmail.com');
-INSERT INTO `viaVerde`.`clients` (`id-cpf`, `name`, `email`) VALUES ('14268305300', 'Renan Lorenzo Sérgio Costa', 'renancosta@gmail.com');
-INSERT INTO `viaVerde`.`clients` (`id-cpf`, `name`, `email`) VALUES ('20341345407', 'Martin Pietro Diego da Mata', 'martinpdmata@gmail.com');
-INSERT INTO `viaVerde`.`clients` (`id-cpf`, `name`, `email`) VALUES ('44434759078', 'Maya Juliana da Paz', 'mayadapaz@hotmail.com');
-INSERT INTO `viaVerde`.`clients` (`id-cpf`, `name`, `email`) VALUES ('03289369013', 'Vanessa Alessandra da Luz', 'nessaluz@hotmail.com');
-INSERT INTO `viaVerde`.`clients` (`id-cpf`, `name`, `email`) VALUES ('75907844434', 'Teste com mesmo CPF', 'testecpf@gmail.com'); -- mesmo cpf da anterior
+INSERT INTO `viaVerde`.`clients` (`id_cpf`, `name`, `email`) VALUES ('69013032893', 'Rebecca Maria Marlene', 'becca@gmail.com');
+INSERT INTO `viaVerde`.`clients` (`id_cpf`, `name`, `email`) VALUES ('14268305300', 'Renan Lorenzo Sérgio Costa', 'renancosta@gmail.com');
+INSERT INTO `viaVerde`.`clients` (`id_cpf`, `name`, `email`) VALUES ('20341345407', 'Martin Pietro Diego da Mata', 'martinpdmata@gmail.com');
+INSERT INTO `viaVerde`.`clients` (`id_cpf`, `name`, `email`) VALUES ('44434759078', 'Maya Juliana da Paz', 'mayadapaz@hotmail.com');
+INSERT INTO `viaVerde`.`clients` (`id_cpf`, `name`, `email`) VALUES ('03289369013', 'Vanessa Alessandra da Luz', 'nessaluz@hotmail.com');
+INSERT INTO `viaVerde`.`clients` (`id_cpf`, `name`, `email`) VALUES ('75907844434', 'Teste com mesmo CPF', 'testecpf@gmail.com'); -- mesmo cpf da anterior
 
 -- ALTERANDO clients
 
 UPDATE `clients`
 SET `email` = 'beccamm@gmail.com'
-WHERE `id-cpf` = '69013032893';
+WHERE `id_cpf` = '69013032893';
 
 -- CONSULTANDO TODOS OS clients
 SELECT * FROM `viaVerde`.`clients`;
@@ -139,20 +140,20 @@ SELECT * FROM `viaVerde`.`clients`;
 
 -- POPULANDO farmers
 
-INSERT INTO `viaVerde`.`farmers` (`id-cpf`, `name`, `certificado-organico`, `email`) VALUES ('15334358944', 'Josiane Maria de Souza', True, 'josiane@fetape.com');
-INSERT INTO `viaVerde`.`farmers` (`id-cpf`, `name`, `certificado-organico`, `email`) VALUES ('13538944345', 'Jose', False, 'jose@fetape.com');
-INSERT INTO `viaVerde`.`farmers` (`id-cpf`, `name`, `certificado-organico`, `email`) VALUES ('03289369013', 'Vanessa Alessandra da Luz', True, 'nessaluz2@hotmail.com');
-INSERT INTO `viaVerde`.`farmers` (`id-cpf`, `name`, `certificado-organico`, `email`) VALUES ('44955616429', 'Katyene Cavalcanti Reis', True, 'katyene.reis@geradornv.com.br');
-INSERT INTO `viaVerde`.`farmers` (`id-cpf`, `name`, `certificado-organico`, `email`) VALUES ('86287626046', 'Benedito Livramento Cruz', True, 'benedito.cruz@geradornv.com.br');
+INSERT INTO `viaVerde`.`farmers` (`id_cpf`, `name`, `certificado-organico`, `email`) VALUES ('15334358944', 'Josiane Maria de Souza', True, 'josiane@fetape.com');
+INSERT INTO `viaVerde`.`farmers` (`id_cpf`, `name`, `certificado-organico`, `email`) VALUES ('13538944345', 'Jose', False, 'jose@fetape.com');
+INSERT INTO `viaVerde`.`farmers` (`id_cpf`, `name`, `certificado-organico`, `email`) VALUES ('03289369013', 'Vanessa Alessandra da Luz', True, 'nessaluz2@hotmail.com');
+INSERT INTO `viaVerde`.`farmers` (`id_cpf`, `name`, `certificado-organico`, `email`) VALUES ('44955616429', 'Katyene Cavalcanti Reis', True, 'katyene.reis@geradornv.com.br');
+INSERT INTO `viaVerde`.`farmers` (`id_cpf`, `name`, `certificado-organico`, `email`) VALUES ('86287626046', 'Benedito Livramento Cruz', True, 'benedito.cruz@geradornv.com.br');
 
 SELECT * FROM `viaVerde`.`farmers`;
 
 -- consultar quem é produtor e cliente 
 
-SELECT `clients`.`id-cpf`, `farmers`.`id-cpf`
+SELECT `clients`.`id_cpf`, `farmers`.`id_cpf`
 	FROM `clients`
 	INNER JOIN `farmers`
-		 on `clients`.`id-cpf` = `farmers`.`id-cpf`;
+		 on `clients`.`id_cpf` = `farmers`.`id_cpf`;
 -- FAZER ELE IMPRIMIR name E COISAS MAIS
 
 -- POPULANDO AS FEIRAS
@@ -185,13 +186,13 @@ SELECT * FROM `viaVerde`.`feiras_tem_farmers`;
 -- ver como imprime com name
 
 -- POPULANDO COMPRA-VENDA
-INSERT INTO `viaVerde`.`compras-vendas` (`clients_id-cpf`, `farmers_id-cpf`, `resgate-data`, `feiras_id-feira`) VALUES('69013032893', '15334358944', '2022-06-25 15:35:00', 1);
-INSERT INTO `viaVerde`.`compras-vendas` (`clients_id-cpf`, `farmers_id-cpf`, `resgate-data`, `feiras_id-feira`) VALUES('14268305300', '13538944345', '2022-06-25 10:48:00', 2);
-INSERT INTO `viaVerde`.`compras-vendas` (`clients_id-cpf`, `farmers_id-cpf`, `resgate-data`, `feiras_id-feira`) VALUES('20341345407', '03289369013', '2022-06-25 17:40:00', 3);
-INSERT INTO `viaVerde`.`compras-vendas` (`clients_id-cpf`, `farmers_id-cpf`, `resgate-data`, `feiras_id-feira`) VALUES('44434759078', '15334358944', '2022-06-25 10:00:00', 4);
+INSERT INTO `viaVerde`.`compras-vendas` (`clients_id_cpf`, `farmers_id_cpf`, `resgate-data`, `feiras_id-feira`) VALUES('69013032893', '15334358944', '2022-06-25 15:35:00', 1);
+INSERT INTO `viaVerde`.`compras-vendas` (`clients_id_cpf`, `farmers_id_cpf`, `resgate-data`, `feiras_id-feira`) VALUES('14268305300', '13538944345', '2022-06-25 10:48:00', 2);
+INSERT INTO `viaVerde`.`compras-vendas` (`clients_id_cpf`, `farmers_id_cpf`, `resgate-data`, `feiras_id-feira`) VALUES('20341345407', '03289369013', '2022-06-25 17:40:00', 3);
+INSERT INTO `viaVerde`.`compras-vendas` (`clients_id_cpf`, `farmers_id_cpf`, `resgate-data`, `feiras_id-feira`) VALUES('44434759078', '15334358944', '2022-06-25 10:00:00', 4);
 
-INSERT INTO `viaVerde`.`compras-vendas` (`clients_id-cpf`, `farmers_id-cpf`, `resgate-data`, `feiras_id-feira`) VALUES('03289369013', '86287626046', '2022-06-25 13:45:00', 1);
-INSERT INTO `viaVerde`.`compras-vendas` (`clients_id-cpf`, `farmers_id-cpf`, `resgate-data`, `feiras_id-feira`) VALUES('75907844434', '44955616429', '2022-06-25 10:15:00', 2);
+INSERT INTO `viaVerde`.`compras-vendas` (`clients_id_cpf`, `farmers_id_cpf`, `resgate-data`, `feiras_id-feira`) VALUES('03289369013', '86287626046', '2022-06-25 13:45:00', 1);
+INSERT INTO `viaVerde`.`compras-vendas` (`clients_id_cpf`, `farmers_id_cpf`, `resgate-data`, `feiras_id-feira`) VALUES('75907844434', '44955616429', '2022-06-25 10:15:00', 2);
 
 SELECT * FROM `viaVerde`.`compras-vendas`;
 
