@@ -1,5 +1,3 @@
-![Logomarca feita por Lucas](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a6bc9bad-037c-44f1-9f8c-84a54db58c56/Untitled.png)
-
-Logomarca feita por Lucas
+![Logomarca feita por Lucas](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a6bc9bad-037c-44f1-9f8c-84a54db58c56/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220625%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220625T000153Z&X-Amz-Expires=86400&X-Amz-Signature=f00db671a1926ffb0ccbda333da74879eb5656f5dcdcb547c264c53d252d1c30&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
 
 Solução voltada para feiras de produtos orgânicos.
