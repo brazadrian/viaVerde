@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `viaVerde`.`markets_have_farmers` (
 );
 
 -- -----------------------------------------------------
--- populando e consultando as tabelas
+-- POPULANDO E CONSULTANDO AS TABELAS
 -- -----------------------------------------------------
 
 USE `viaVerde`;
@@ -130,7 +130,9 @@ SELECT `clients`.`id_cpf`, `farmers`.`id_cpf`
 	INNER JOIN `farmers`
 		 on `clients`.`id_cpf` = `farmers`.`id_cpf`;
 
+-- -----------------------------------------------------
 -- populando MARKETS
+-- -----------------------------------------------------
 INSERT INTO `viaVerde`.`markets` VALUES (DEFAULT, 'FETAPE', 'R. Gervásio Pires, 876 - Santo Amaro, Recife - PE, 50050-070');
 INSERT INTO `viaVerde`.`markets` VALUES (DEFAULT, 'Santo Amaro', 'Rua Frei Cassimiro, SN - Santo Amaro, Recife - PE');
 INSERT INTO `viaVerde`.`markets` VALUES (DEFAULT, 'Casa Amarela', 'Rua Padre Lemos, 94 - Casa Amarela, Recife - PE');
@@ -141,8 +143,9 @@ INSERT INTO `viaVerde`.`markets` VALUES (DEFAULT, 'Parnamirim', 'Rua do Parnamir
 -- -----------------------------------------------------
 SELECT * FROM `viaVerde`.`markets` WHERE `name` = "Santo Amaro";
 
--- POPULANDO operation_day
-
+-- -----------------------------------------------------
+-- populando OPERATION_DAYS
+-- -----------------------------------------------------
 INSERT INTO `viaVerde`.`operation_days` VALUES(1, '2022-06-25', '07:00:00', '16:00:00');
 INSERT INTO `viaVerde`.`operation_days` VALUES(2, '2022-06-27', '08:00:00', '17:00:00');
 INSERT INTO `viaVerde`.`operation_days` VALUES(3, '2022-06-25', '10:00:00', '18:00:00');
@@ -155,7 +158,7 @@ SELECT * FROM `viaVerde`.`operation_days` WHERE operation_day = '2022-06-27'; --
 
 SELECT *, `name` FROM `viaVerde`.`operation_days`, `viaVerde`.`markets` WHERE operation_day = '2022-06-27'; -- seleciona, também, o nome das feiras de hoje
 
--- POPULANDO markets_have_farmers
+-- POPULANDO MARKETS_HAVE_FARMERS
 INSERT INTO `viaVerde`.`markets_have_farmers` VALUES(1, '15334358944');
 INSERT INTO `viaVerde`.`markets_have_farmers` VALUES(3, '13538944345');
 INSERT INTO `viaVerde`.`markets_have_farmers` VALUES(4, '03289369013');
@@ -167,13 +170,17 @@ INSERT INTO `viaVerde`.`markets_have_farmers` VALUES(1, '86287626046');
 -- -----------------------------------------------------
 SELECT *, `name` FROM `viaVerde`.`markets_have_farmers`, `viaVerde`.`farmers` WHERE `markets_id_market` = 1;
 
--- POPULANDO BUY
-INSERT INTO `viaVerde`.`buys` (`clients_id_cpf`, `farmers_id_cpf`, `recue_data`, `markets_id_market`) VALUES('69013032893', '15334358944', '2022-06-27 15:35:00', 1);
-INSERT INTO `viaVerde`.`buys` (`clients_id_cpf`, `farmers_id_cpf`, `recue_data`, `markets_id_market`) VALUES('14268305300', '13538944345', '2022-06-27 10:48:00', 2);
-INSERT INTO `viaVerde`.`buys` (`clients_id_cpf`, `farmers_id_cpf`, `recue_data`, `markets_id_market`) VALUES('20341345407', '03289369013', '2022-06-27 17:40:00', 3);
-INSERT INTO `viaVerde`.`buys` (`clients_id_cpf`, `farmers_id_cpf`, `recue_data`, `markets_id_market`) VALUES('44434759078', '15334358944', '2022-06-27 10:00:00', 4);
+-- -----------------------------------------------------
+-- populando BUYS
+-- -----------------------------------------------------
+INSERT INTO `viaVerde`.`buys` VALUES(DEFAULT, '69013032893', '15334358944', '2022-06-27 15:35:00', 1);
+INSERT INTO `viaVerde`.`buys` VALUES(DEFAULT, '14268305300', '13538944345', '2022-06-27 10:48:00', 2);
+INSERT INTO `viaVerde`.`buys` VALUES(DEFAULT, '20341345407', '03289369013', '2022-06-27 17:40:00', 3);
+INSERT INTO `viaVerde`.`buys` VALUES(DEFAULT, '44434759078', '15334358944', '2022-06-27 10:00:00', 4);
+INSERT INTO `viaVerde`.`buys` VALUES(DEFAULT, '03289369013', '86287626046', '2022-06-27 13:45:00', 1);
+INSERT INTO `viaVerde`.`buys` VALUES(DEFAULT, '75907844434', '44955616429', '2022-06-27 10:15:00', 2);
 
-INSERT INTO `viaVerde`.`buys` (`clients_id_cpf`, `farmers_id_cpf`, `recue_data`, `markets_id_market`) VALUES('03289369013', '86287626046', '2022-06-27 13:45:00', 1);
-INSERT INTO `viaVerde`.`buys` (`clients_id_cpf`, `farmers_id_cpf`, `recue_data`, `markets_id_market`) VALUES('75907844434', '44955616429', '2022-06-27 10:15:00', 2);
-
+-- -----------------------------------------------------
+-- consultando quais compras foram feitas na feira da FETAPE
+-- -----------------------------------------------------
 SELECT * FROM `viaVerde`.`buys` WHERE `markets_id_market` = 1;
