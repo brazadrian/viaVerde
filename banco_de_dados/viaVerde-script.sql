@@ -89,8 +89,6 @@ INSERT INTO `viaVerde`.`clients` VALUES ('14268305300', 'Renan Lorenzo Sérgio C
 INSERT INTO `viaVerde`.`clients` VALUES ('20341345407', 'Martin Pietro Diego da Mata', 'martinpdmata@gmail.com');
 INSERT INTO `viaVerde`.`clients` VALUES ('44434759078', 'Maya Juliana da Paz', 'mayadapaz@hotmail.com');
 INSERT INTO `viaVerde`.`clients` VALUES ('03289369013', 'Vanessa Alessandra da Luz', 'nessaluz@hotmail.com');
--- pra dar erro e testar tua fé:
-INSERT INTO `viaVerde`.`clients` VALUES ('03289369013', 'Teste com mesmo CPF', 'testecpf@gmail.com'); -- mesmo cpf da anterior
 
 -- -----------------------------------------------------
 -- consultar todos os clientes
